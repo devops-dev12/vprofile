@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Hello World') {
+            steps {
+                echo "Hello World from Jenkins Pipeline"
+            }
+        }
+
+        stage('Clone Repository') {
+            steps {
+                echo "Cloning vprofile repository..."
+                git branch: "${BRANCH}", url: "${REPO_URL}"
+            }
+        }
+
+        stage('Verify Files') {
+            steps {
+                echo "Listing files from repository"
+                sh 'ls -ltr'
+            }
+        }
+
+        stage('Build Stage') {
+            steps {
+                echo "Running build stage..."
+                sh 'echo Build Successful'
+            }
+        }
+
+        stage('Complete') {
+            steps {
+                echo "Pipeline executed successfully"
+            }
+        }
+
+    }
+}
