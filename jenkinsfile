@@ -1,43 +1,31 @@
 pipeline {
     agent any
 
-    environment {
-        REPO_URL = 'https://github.com/devops-dev12/vprofile.git'
-        BRANCH = 'main'
-    }
-
     stages {
+
+        stage('Start') {
+            steps {
+                echo "Pipeline started successfully"
+            }
+        }
 
         stage('Hello World') {
             steps {
-                echo "Hello World from Jenkins Pipeline"
+                echo "Hello World from Jenkins"
             }
         }
 
-        stage('Clone Repository') {
+        stage('Test Command') {
             steps {
-                echo "Cloning vprofile repository..."
-                git url: "${REPO_URL}", branch: "${BRANCH}"
+                sh 'echo This is a test pipeline'
+                sh 'date'
+                sh 'whoami'
             }
         }
 
-        stage('Verify Clone') {
+        stage('Finish') {
             steps {
-                echo "Checking repository contents..."
-                sh 'ls -ltr'
-            }
-        }
-
-        stage('Build Stage') {
-            steps {
-                echo "Running test build stage..."
-                sh 'echo Build Successful'
-            }
-        }
-
-        stage('Complete') {
-            steps {
-                echo "Pipeline executed successfully"
+                echo "Pipeline finished successfully"
             }
         }
 
